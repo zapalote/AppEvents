@@ -4,8 +4,8 @@ function bckStats() {
 	// retrieve the backup log
 	global $db, $log_table;
 
-	echo "<h3>Backups  <span class='btns'><a class='button' href='#' onclick='window.history.back();return false;'>back</a>
-		<a class='button' href='stats.php?e'>edits</a></span></h3>";
+	echo "<h3>Backups  <span class='btns'><div class='button' data-go=''>back</div>
+		<a class='button' data-go='e'>edits</a></span></h3>";
 	// get log and split it in entries
 	$log = file_get_contents('backup.log');
 	$out = explode("#", $log);
@@ -25,7 +25,7 @@ function dbStats() {
 	global $db, $log_table;
 
 	$last = deriveDay(filemtime("backup.log"));
-	echo "<h3>Last backup: {$last} <span class='btns'><a class='button' href='#' onclick='window.history.back();return false;'>back</a></span></h3>";
+	echo "<h3>Last backup: {$last} <span class='btns'><div class='button' data-go=''>back</div></span></h3>";
 	// get log and split it in entries
 	$log = file_get_contents('backup.log');
 	$out = explode("#", $log);
@@ -33,7 +33,7 @@ function dbStats() {
 	$l = $out[1];
 	$l = preg_replace('/[\-]{5,}/', '', $l);
 	$l = preg_replace('/\n/m', '<br />', $l);
-	printf("<tr class='drill-down' data-href='stats.php?bck'><td>%s</td></tr>", $l);
+	printf("<tr class='drill-down' data-href='bck'><td>%s</td></tr>", $l);
 	echo "</tbody></table>";
 
 	// get intruders, if any
@@ -51,9 +51,9 @@ function dbStats() {
 		$upd[$e[0]] = $e[2];
 	}
 
-	$bck = "<a class='button' style='left:0;' href='stats.php?s'>searches</a> 
-		<a class='button' href='stats.php?n'>not found</a> <a class='button' href='stats.php?u'>usage</a>
-		<a class='button' href='stats.php?e'>edits</a>";
+	$bck = "<a class='button' style='left:0;' data-go='s'>searches</a> 
+		<a class='button' data-go='n'>not found</a> <a class='button' data-go='u'>usage</a>
+		<a class='button' data-go='e'>edits</a>";
 	printf("<h3>Log size: %sMB; <span class='btns'>%s</span></h3>", $size, $bck);
 	$lexems = 0;
 	$verba = 0;
@@ -102,7 +102,7 @@ function xipStats($l) {
 
 	if($l == "log" && $total == 0) return;
 
-	printf("<h3>Not allowed <span class='btns'><a class='button' href='#' onclick='window.history.back();return false;'>back</a></span></h3>
+	printf("<h3>Not allowed <span class='btns'><a class='button' data-go=''>back</a></span></h3>
 		<table id='stats' class='sttable'>\n");
 	while ($e = $res->fetch_row()) {
 		$w[] = ($e[0])? $e[0] : $e[1];
@@ -129,7 +129,7 @@ function lexStats($l) {
 	$sql = "select lex, json, upd from lexems where lex like '{$q}%' order by upd desc";
 	$res = $db->query($sql);
 	printf("<h3>Letter ".mb_strtoupper($q)." &mdash; %s lema  <span class='btns'>
-		<a class='button' href='#' onclick='window.history.back();return false;'>back</a></span></h3>
+		<a class='button' data-go=''>back</a></span></h3>
 		<table id='stats' class='sttable'>\n", $res->num_rows);
 	$total = 0; $new = 0;
 	$n = 0;

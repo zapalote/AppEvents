@@ -54,6 +54,8 @@ a { text-decoration: none;}
 	float: right;
 }
 .button {
+	display:inline;
+	cursor: pointer;
 	font-size: .8em;
 	position: relative;
 	left: 0;

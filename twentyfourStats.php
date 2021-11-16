@@ -6,7 +6,7 @@ function twentyfourStats($q, $l) {
 
 	$dq = ($l)? "date(upd) = '{$l}'" : "upd >= date_sub(now(),interval 23 hour)";
 	$dt = ($l)? "on {$l}" : "(last 24 hours)";
-	$txt = "{$dt} <span class='btns'><a class='button' href='stats.php?30'>30 days</a> <a class='button' href='stats.php?s'>topics</a> <a class='button' href='stats.php?m'>montlhy</a></span>";
+	$txt = "{$dt} <span class='btns'><a class='button' data-go='30'>30 days</a> <div class='button' data-go='ref'>referrals</div> <a class='button' data-go='s'>topics</a> <a class='button' data-go='m'>montlhy</a></span>";
 
 	$sql = "select ip, cnt, u from (
 				select INET_NTOA(src) as ip, count(*) as cnt, max(upd) as u from {$log_table} 

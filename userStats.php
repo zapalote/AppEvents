@@ -58,7 +58,7 @@ function userStats() {
             }
 		});
 	</script>";
-	printf("<h3>Users per hit range (last 30 days) <span class='btns'><a class='button' href='stats.php'>back</a></span></h3><table id='stats' class='sttable'>\n");
+	printf("<h3>Users per hit range (last 30 days) <span class='btns'><a class='button' data-go=''>back</a></span></h3><table id='stats' class='sttable'>\n");
 	$total = 0; $users = 0;
 	echo "<thead><tr><th>hits</th><th>users</th></tr></thead><tbody>\n";
 	foreach ($bucket as $key => $val) {
@@ -79,7 +79,7 @@ function userStats() {
 
 	$res = $db->query($sql);
 
-	echo "<h3>&nbsp;</h3><h3>Power users (>50 hits) last 30 days <span class='btns'><a class='button' href='stats.php'>back</a></span></h3><table id='stats' class='sttable'>\n";
+	echo "<h3>&nbsp;</h3><h3>Power users (>50 hits) last 30 days <span class='btns'><a class='button' data-go=''>back</a></span></h3><table id='stats' class='sttable'>\n";
 	$users = 0;
 	echo "<thead><tr><th data-sort='string'>▽ user</th><th data-sort='int' data-sort-default='desc'>▽ hits</th></tr>
 			</thead><tbody>\n";
@@ -101,7 +101,7 @@ function userStats() {
 
 	$res = $db->query($sql);
 
-	echo "<h3>&nbsp;</h3><h3>Power users (>50 hits) since Jan 2017 <span class='btns'><a class='button' href='stats.php'>back</a></span></h3><table id='stats' class='sttable'>\n";
+	echo "<h3>&nbsp;</h3><h3>Power users (>50 hits) since Jan 2017 <span class='btns'><a class='button' data-go=''>back</a></span></h3><table id='stats' class='sttable'>\n";
 	$users = 0;
 	echo "<thead><tr><th data-sort='string'>▽ user</th><th data-sort='int' data-sort-default='desc'>▽ hits</th></tr>
 			</thead><tbody>\n";

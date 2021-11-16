@@ -51,7 +51,7 @@ function uaStats() {
 		});
 	</script>";
 
-	printf("<h3>Mobile UA ratios <span class='btns'><a class='button' href='#' onclick='window.history.back();return false;'>back</a></span></h3><table id='stats' class='sttable'>\n");
+	printf("<h3>Mobile UA ratios <span class='btns'><a class='button' data-go=''>back</a></span></h3><table id='stats' class='sttable'>\n");
 	$tot = 0; $nft = 0;
 	echo "<thead><tr><th data-sort='string'>▽ Date</th><th data-sort='int' data-sort-default='desc'>▽ Hits</th>
 		<th data-sort='int' data-sort-default='desc'>▽ Mobile</th></tr></thead><tbody>\n";
@@ -70,7 +70,7 @@ function uaStats() {
 			having c >= 20
 			order by c desc";
 	$res = $db->query($sql);
-	echo "<h3>Top hits from mobile (>20) <span class='btns'><a class='button' href='#' onclick='window.history.back();return false;'>back</a></span></h3>
+	echo "<h3>Top hits from mobile (>20) <span class='btns'><a class='button' data-go=''>back</a></span></h3>
 			<table id='stats' class='sttable'>\n";
 	echo "<thead><tr><th data-sort='string'>▽ Hits</th><th data-sort='int'>▽ Counts</th></tr>
 			</thead><tbody>\n";
@@ -85,7 +85,7 @@ function uaStats() {
 			from {$log_table} where acc='1' and upd >= date_sub(now(),interval 30 day)
 			order by upd desc";
 	$res = $db->query($sql);
-	echo "<h3>Mobile last 30 days <span class='btns'><a class='button' href='#' onclick='window.history.back();return false;'>back</a></span></h3>
+	echo "<h3>Mobile last 30 days <span class='btns'><a class='button' data-go=''>back</a></span></h3>
 			<table id='stats' class='sttable'>\n";
 	$total = $res->num_rows;
 	echo "<thead><tr><th data-sort='string' class='ip'>▽ User</th><th data-sort='string'>▽ Hits</th><th data-sort='string'>▽ Time</th></tr>

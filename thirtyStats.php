@@ -15,8 +15,9 @@ function thirtyStats() {
 	while ($e = $res->fetch_row()) {
 		$u = "(unique users: ".$e[0].")";
 	}
-	$txt = "in the last 30 days {$u}  <span class='btns'><a class='button' href='stats.php'>24 hrs</a>
-		<a class='button' href='stats.php?m'>monthly</a></span>";
+	$txt = "in the last 30 days {$u}  <span class='btns'><a class='button' data-go=''>24 hrs</a> 
+		<div class='button' data-go='ref'>referrals</div>
+		<a class='button' data-go='m'>monthly</a></span>";
 
 	$sql = "select d, sum(u), sum(c) from (
 				select date(upd) as d, count(distinct INET_NTOA(src)) as u, count(*) as c from {$log_table}
@@ -66,7 +67,7 @@ function thirtyStats() {
 		});
 	</script>";
 
-	printf("<h3>Users &mdash; {$txt}</h3><table id='stats' class='sttable'>\n");
+	printf("<h3>Sessions &mdash; {$txt}</h3><table id='stats' class='sttable'>\n");
 	$total = 0; $users = 0;
 	echo "<thead><tr><th data-sort='string'>▽ Date</th><th data-sort='int' data-sort-default='desc'>▽ Sessions</th>
 		<th data-sort='int' data-sort-default='desc'>▽ #</th></tr></thead><tbody>\n";

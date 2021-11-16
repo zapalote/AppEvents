@@ -64,7 +64,7 @@ function monthlyStats() {
 	
 	$month = date('F');
 	$fc = forecastMonth();
-	$txt = "{$u} &mdash; forecast {$month} {$fc} <span class='btns'><a class='button' href='stats.php'>24 hrs</a></span>";
+	$txt = "{$u} &mdash; forecast {$month} {$fc} <span class='btns'><a class='button' data-go=''>24 hrs</a></span>";
 
 	printf("<h3>Total users {$txt}</h3><table id='stats' class='sttable'>\n");
 	$total = 0; $users = 0;

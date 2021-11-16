@@ -49,7 +49,7 @@ function editStats($q) {
 			from {$log_table} where acc='1' and upd >= date_sub(now(),interval 30 day)
 			order by upd desc";
 	$res = $db->query($sql);
-	echo "<h3>Lema edits <span class='btns'><a class='button' href='#' onclick='window.history.back();return false;'>back</a></span></h3>
+	echo "<h3>Lema edits <span class='btns'><a class='button' data-go=''>back</a></span></h3>
 			<table id='stats' class='sttable'>\n";
 	$total = $res->num_rows;
 	echo "<thead><tr><th data-sort='string'>▽ Lema</th><th data-sort='string'>▽ Time</th></tr>

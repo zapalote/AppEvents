@@ -1,33 +1,17 @@
 <?php
 mb_internal_encoding("UTF-8");
-setlocale(LC_TIME, "NL_nl");
+date_default_timezone_set ("Europe/Amsterdam");
+setlocale(LC_TIME, 'en_NL');
+
+// App wide constants
+define('STATS_DB_DEV_INI', "../private/inspira_stats.ini");
+define('STATS_DB_PROD_INI', "../../inspira.ini");
+define('STATS_SITE', "inspiratree.com");
+define('STATS_TITLE', "Inspiratree Usage Stats");
+define('STATS_LOCK', true);
 
 // Connect to the database
-define('AppEventsStats', true);
 require_once('db.php');
 $db = db_connect();
 
-function log_ip($event, $ip, $acc){
-	global $db;
-
-	$sql = (strstr($ip, ':'))? 
-		"insert into log ( event, src, src6, acc ) values ( '$event', 0, INET6_ATON('$ip'), '$acc' )" :
-		"insert into log ( event, src, acc ) values ( '$event', INET_ATON('$ip'), '$acc' )";
-	$db->query($sql);
-}
-
-function isAllowed($ip){
-	// add any public/satic IP addresses here that should be allowed access 
-	static $ips = array(
-		"127.0.0.0",
-		"::1"
-	);
-
-	if(in_array($ip, $ips, TRUE))
-		return $ip;
-
-	// log the request and return null if NOT allowed
-	log_ip('XIP',$ip,4);
-	return NULL;
-}
 ?>
