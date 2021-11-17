@@ -35,6 +35,8 @@ function db_connect() {
             printf("<h2>Connect status: %s</h2>", $db->connect_error);
             exit();
         }
+
+        define('STATS_LOG_TABLE', $cf['log_table']);
     }
 
     return $db;

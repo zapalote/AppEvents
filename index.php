@@ -89,6 +89,9 @@ $query = ($q) ? "?" . $_SERVER['QUERY_STRING'] : '';
 	<div class="container">
 		<h2><?php echo $title ?></h2>
 		<div id="data"></div>
+		<footer class="foot">
+			<p><?php echo STATS_ID ?></p>
+		</footer>
 	</div>
 	<link href="https://fonts.googleapis.com/css?family=Neuton:400,700,Lato:400" rel="stylesheet" type="text/css" />
 </body>

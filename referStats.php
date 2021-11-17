@@ -45,7 +45,7 @@ function referStats()
 
   # most referrals
   $sql = "select refer as r, count(*) as c from {$log_table} 
-				where refer is not null and upd >= date_sub(now(),interval 50 day) group by r order by c desc";
+				where refer is not null and upd >= date_sub(now(),interval 30 day) group by r order by c desc";
 
   $res = $db->query($sql);
   $words = [];

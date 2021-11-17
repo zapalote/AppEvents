@@ -2,7 +2,7 @@
 // Connect to the database
 require_once('config.php');
 global $db, $log_table;
-$log_table = "log";
+$log_table = STATS_LOG_TABLE;
 
 //if(!isAllowed($_SERVER['REMOTE_ADDR'])) {
 // die($_SERVER['REMOTE_ADDR']);

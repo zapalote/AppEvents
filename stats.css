@@ -109,3 +109,8 @@ a { text-decoration: none;}
 .sep {
 	border-top: 2px solid rgba(61,61,69,1);
 }
+.foot {
+	color: #868686;
+	font-size: small;
+	float:right;
+}

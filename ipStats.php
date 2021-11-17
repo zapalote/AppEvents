@@ -37,7 +37,7 @@ function ipStats($l) {
 	$l = base64_decode($l);
 	$sql = "select lex, acc, upd from {$log_table} where src=INET_ATON('{$l}') or src6=INET6_ATON('{$l}') order by upd desc";
 	$res = $db->query($sql);
-	printf("<h3>Requests from %s  <span class='btns'><a class='button' data-go=''>back</a></span></h3>
+	printf("<h3>Requests from %s  <span class='btns'><div class='button' data-go=''>back</div></span></h3>
 		<table id='stats' class='sttable'>\n", anon($l));
 	$total = $res->num_rows;
 	$chart = [];

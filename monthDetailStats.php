@@ -20,8 +20,8 @@ function monthDetailStats($l) {
 	while ($e = $res->fetch_row()) {
 		$u = "(unique users: ".$e[0].")";
 	}
-	$txt = "in {$md}  <span class='btns'><a class='button' data-go=''>24 hrs</a>
-		<a class='button' data-go='m'>monthly</a></span>";
+	$txt = "in {$md}  <span class='btns'><div class='button' data-go=''>24 hrs</div>
+		<div class='button' data-go='m'>monthly</div></span>";
 
 	$sql = "select d, sum(u), sum(c) from (
 				select date(upd) as d, count(distinct INET_NTOA(src)) as u, count(*) as c from {$log_table}

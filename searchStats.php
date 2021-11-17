@@ -25,7 +25,7 @@ function searchStats() {
 	}
 	arsort($words);
 
-	echo "<h3>&nbsp;</h3><h3>Top 10 searches last 30 days <span class='btns'><a class='button' data-go=''>back</a></span></h3><table id='stats' class='sttable'>\n";
+	echo "<h3>&nbsp;</h3><h3>Top 10 searches last 30 days <span class='btns'><div class='button' data-go=''>back</div></span></h3><table id='stats' class='sttable'>\n";
 	echo "<thead><tr><th data-sort='string'>▽ word</th><th data-sort='int' data-sort-default='desc'>▽ searches</th></tr>
 			</thead><tbody>\n";
 
@@ -57,7 +57,7 @@ function searchStats() {
 	}
 	arsort($words);
 
-	echo "<h3>&nbsp;</h3><h3>Most searched words (>50) <span class='btns'><a class='button' data-go=''>back</a></span></h3><table id='stats' class='sttable'>\n";
+	echo "<h3>&nbsp;</h3><h3>Most searched words (>50) <span class='btns'><div class='button' data-go=''>back</div></span></h3><table id='stats' class='sttable'>\n";
 	echo "<thead><tr><th data-sort='string'>▽ word</th><th data-sort='int' data-sort-default='desc'>▽ searches</th></tr>
 			</thead><tbody>\n";
 

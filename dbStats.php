@@ -5,7 +5,7 @@ function bckStats() {
 	global $db, $log_table;
 
 	echo "<h3>Backups  <span class='btns'><div class='button' data-go=''>back</div>
-		<a class='button' data-go='e'>edits</a></span></h3>";
+		<div class='button' data-go='e'>edits</div></span></h3>";
 	// get log and split it in entries
 	$log = file_get_contents('backup.log');
 	$out = explode("#", $log);
@@ -51,9 +51,9 @@ function dbStats() {
 		$upd[$e[0]] = $e[2];
 	}
 
-	$bck = "<a class='button' style='left:0;' data-go='s'>searches</a> 
-		<a class='button' data-go='n'>not found</a> <a class='button' data-go='u'>usage</a>
-		<a class='button' data-go='e'>edits</a>";
+	$bck = "<div class='button' style='left:0;' data-go='s'>searches</div> 
+		<div class='button' data-go='n'>not found</div> <div class='button' data-go='u'>usage</div>
+		<div class='button' data-go='e'>edits</div>";
 	printf("<h3>Log size: %sMB; <span class='btns'>%s</span></h3>", $size, $bck);
 	$lexems = 0;
 	$verba = 0;
@@ -102,7 +102,7 @@ function xipStats($l) {
 
 	if($l == "log" && $total == 0) return;
 
-	printf("<h3>Not allowed <span class='btns'><a class='button' data-go=''>back</a></span></h3>
+	printf("<h3>Not allowed <span class='btns'><div class='button' data-go=''>back</div></span></h3>
 		<table id='stats' class='sttable'>\n");
 	while ($e = $res->fetch_row()) {
 		$w[] = ($e[0])? $e[0] : $e[1];
@@ -129,7 +129,7 @@ function lexStats($l) {
 	$sql = "select lex, json, upd from lexems where lex like '{$q}%' order by upd desc";
 	$res = $db->query($sql);
 	printf("<h3>Letter ".mb_strtoupper($q)." &mdash; %s lema  <span class='btns'>
-		<a class='button' data-go=''>back</a></span></h3>
+		<div class='button' data-go=''>back</div></span></h3>
 		<table id='stats' class='sttable'>\n", $res->num_rows);
 	$total = 0; $new = 0;
 	$n = 0;
