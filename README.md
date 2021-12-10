@@ -3,6 +3,8 @@
 This project implements a simple app events collection backend and a statistics dashboard (react) 
 to visualize user engagement.
 
+![AppEvents Dashboard](./app-events-dashboard.png)
+
 The original motivation was to allow for interactive websites to record and analyze anonymous 
 usage data **without** using cookies or tracking software.
 
@@ -39,7 +41,7 @@ such as to block non-admin access to it. On my hosting service the root path for
 `domains/mydomain.com/public_html/` and the `.ini` files is located under 
 `domains/mydomain.com/app-events.ini`  
 
->**WARNING** This approach to storing db credentials is adequate for logging data but NOT safe for any sensitive data.
+>**WARNING** This approach to storing db credentials is adequate for website event data but NOT safe for any sensitive data.
 DO NOT share one and the same database for logging and other data you may store as part of your 
 website functionality. 
 
