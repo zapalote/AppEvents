@@ -16,9 +16,9 @@ or through a suitable logging function in your app. Said functionality is not pa
 nevertheless an example of such a script is provided below (see *Logging*).
 
 
-## Backend setup and configuration
+# Backend setup and configuration
 
-### Database
+## Database
 
 The mysql or mariadb software must be installed on the server before hand. 
 The database and its user credentials are created as a first step. 
@@ -44,7 +44,7 @@ DO NOT share one and the same database for logging and other data you may store 
 website functionality. 
 
 
-### Backend configuration
+## Backend configuration
 
 The backend API is configured via the `config.php` file and is located under the deployment directory 
 (`/public` before that). 
@@ -69,7 +69,7 @@ $db = db_connect();
 `STATS_DB_PROD_INI` points to the locaion of the database `.ini` file, 
 `STATS_DB_DEV_INI` for the same file in a development environment.
 
-### Logging, the backend API
+## Logging, the backend API
 
 The logging API consist of a single entry point, defined as follows
 
@@ -111,14 +111,14 @@ No need to read any response, as the the log API returns nothing.
 ```
 
 
-### Required backend software
+## Required backend software
 
 The minimum versions required for the backend are  
->`MariaDB Server version 10.3.24-MariaDB-cll-lve`  
+>`MariaDB Server version: 10.3.24-MariaDB-cll-lve`  
 >`PHP version: 5.5.38`
 
+# Dashboard app
 
 
-### `yarn build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<!-- This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
