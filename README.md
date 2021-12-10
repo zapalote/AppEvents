@@ -101,7 +101,6 @@ No need to read any response, as the the log API returns nothing.
           return false;
     } 
     fetch('app-events/log.php?log=contact-ok');
-    return false;
   }
 </script>
 
