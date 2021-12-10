@@ -109,7 +109,6 @@ No need to read any response, as the the log API returns nothing.
 <a href="mailto:me@mydomain.com?subject=Please contact me" onclick="contactEvent()">Contact me</a>
 ```
 
-
 ## Required backend software
 
 The minimum versions required for the backend are  
