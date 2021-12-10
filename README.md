@@ -13,7 +13,7 @@ cloud based implementation to make it scale-up.
 In order to log events, your website or app needs to submit events through `HTTP GET` requests 
 to the backend. This is typically done through ajax javascript functions within your website pages, 
 or through a suitable logging function in your app. Said functionality is not part of this package, 
-nevertheless an example of such a script is provided below (see *Logging*).
+nevertheless an example of such a script is provided below ([see Logging](#logging-events)).
 
 
 # Backend setup and configuration
@@ -69,7 +69,7 @@ $db = db_connect();
 `STATS_DB_PROD_INI` points to the locaion of the database `.ini` file, 
 `STATS_DB_DEV_INI` for the same file in a development environment.
 
-## Logging, the backend API
+## Logging events
 
 The logging API consist of a single entry point, defined as follows
 
@@ -130,6 +130,8 @@ Clone this repo.
 Create a subdirectory `app-events` under your public html website document root.  
 
 Upload the contents of the `build/` subdirectory to `app-events`  
+
+Update your html pages or app to start recording events  ([see Logging above](#logging-events)).
 
 Open `https://yourwebsite.com/app-events/` on a web broswer.
 
