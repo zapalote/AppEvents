@@ -120,6 +120,8 @@ The minimum versions required for the backend are
 ## Installation
 
 Clone this repo.  
+Edit the file `public/config.js` and replace `<site_name>` with a name for your website or app (this name appears in the dashboard). 
+
 ```
 % cd <app-events-download-path>
 % yarn install
