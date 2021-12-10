@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { TwentyfourStats, ThirtyStats, MonthlyStats, ReferralStats, TopicsStats } from './components';
 
@@ -7,7 +7,10 @@ const App = () => {
   const version = `${(process.env.REACT_APP_NAME)} v${(process.env.REACT_APP_VERSION)}`
   const homeUri = (process.env.NODE_ENV === 'development') ? '/' : '/app-events';
 
-  // const TwentyfourStats = () => (<h2>Works</h2>);
+  useEffect(() => {
+    // APP_TITLE is set when deploying through config_template.js
+    document.title = window.APP_TITLE;
+  }, []);
 
   const AppInfo = () => {
     return (

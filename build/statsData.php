@@ -5,7 +5,6 @@ header('Content-Type: application/json');
 // Connect to the database
 require_once('config.php');
 global $db, $log_table;
-$log_table = "log"; //STATS_LOG_TABLE;
 
 preg_match('/(lex|db|ip|d|n|ua|e|30|u|md|m|bck|s|xip|pip|ref)=?(.*)/', $_SERVER['QUERY_STRING'], $arg);
 $q = ($arg) ? $arg[1] : "";
@@ -15,11 +14,6 @@ $l = ($arg) ? $arg[2] : "";
 switch ($q) {
   case 'pip':
     ipPopup($l);
-    break;
-  case 'ua':
-    // mobile/desktop
-    require('uaStats.php');
-    uaStats();
     break;
   case '30':
     // sessions stats 30 days
@@ -33,16 +27,13 @@ switch ($q) {
     // user stats per month details
     thirtyStats($l);
     break;
-
   case 's':
     // search stats
     searchStats();
     break;
-
   case 'ref':
     referStats();
     break;
-
   case 'd':
   default:
     // 24hrs or given date
@@ -50,6 +41,7 @@ switch ($q) {
 }
 
 $db->close();
+
 
 // ----------------- SEARCHES ------------------
 function searchStats() {
@@ -123,7 +115,6 @@ function referStats() {
     $upd[] = $e[2];
   }
 
-  arsort($refs);
   $t = isset($upd[0])? $upd[0] : 'today midnight';
   $last = deriveDay(strtotime($t));
 

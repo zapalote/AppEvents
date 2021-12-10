@@ -16,7 +16,7 @@ if(!defined('STATS_LOCK')) {
 function db_connect() {
 
     // define connection as a static, global variable, for re-use
-    global $db;
+    global $db, $log_table;
 
     // connect, if not yet done
     if(!isset($db)) {
@@ -35,6 +35,7 @@ function db_connect() {
             printf("<h2>Connect status: %s</h2>", $db->connect_error);
             exit();
         }
+        $log_table = $cf['log_table'];
     }
 
     return $db;

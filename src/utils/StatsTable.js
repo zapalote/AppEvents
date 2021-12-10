@@ -101,8 +101,9 @@ const StatsTable = (props) => {
         </thead>
         <tbody>
           {rows.map((row, rx) =>(
-            <tr key={'tr' + rx} className={((rowsep && rowsep[rx] == 1)? 'sep' : '')} 
-              onClick={() => (drill)? drillTo(drill[rx]) : popUp(popupLinks[rx])}>
+            <tr key={'tr' + rx} 
+                className={((rowsep && rowsep[rx] == 1)? 'sep' : '')} 
+                onClick={() => (drill)? drillTo(drill[rx]) : popupLinks && popUp(popupLinks[rx]) }>
               {row.map((item, ix) => (
                 <td key={'td'+ix}>{item}</td>
               ))}

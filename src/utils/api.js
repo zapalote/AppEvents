@@ -1,6 +1,6 @@
 import axios from 'axios';
 axios.defaults.baseURL = (process.env.NODE_ENV === 'development')?
-  'https://localhost/inspira/app-events/public/statsData.php' : 'https://inspiratree.com/app-events/statsData.php';
+  'http://localhost/AppEvents/public/statsData.php' : 'statsData.php';
 
 const sendApi = async (params) => {
 

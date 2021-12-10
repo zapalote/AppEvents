@@ -83,7 +83,6 @@ const TwentyfourStats = () => {
   }
 
   const ListResults = () => {
-    console.log(results.chart);
     const { chartCfg, chart, labels, tooltips } = initChart(results.chart, results.last);
 
     let popupLinks = [];

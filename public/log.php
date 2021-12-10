@@ -23,7 +23,7 @@ if(isset($_REQUEST['log'])){
 	$ua = $_SERVER['HTTP_USER_AGENT'];
  	$acc = (isMobile($ua))? '1' : '0';
 
-  $ip = getUserIpAddr();
+	$ip = getUserIpAddr();
 
 	$ref = ($ref) ? "'$ref'" : "NULL";
 	$lnd = ($land) ? "'$land'" : "NULL";
@@ -31,6 +31,7 @@ if(isset($_REQUEST['log'])){
 		"insert into log ( lex, src, src6, acc, refer, landing ) values ( '$q', 0, INET6_ATON('$ip'), '$acc', $ref, $lnd )" :
 		"insert into log ( lex, src, acc, refer, landing ) values ( '$q', INET_ATON('$ip'), '$acc', $ref, $lnd )";
 	$db->query($sql);
+	// echo $db->error;
 	$db->close();
 }
 
