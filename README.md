@@ -48,8 +48,7 @@ website functionality.
 
 ## Backend configuration
 
-The backend API is configured via the `config.php` file and is located under the deployment directory 
-(`/public` before that). 
+The backend API is configured via `public/config.php`. 
 ``` 
 <?php
 mb_internal_encoding("UTF-8");
