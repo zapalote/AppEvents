@@ -119,6 +119,18 @@ The minimum versions required for the backend are
 
 # Dashboard app
 
+## Installation
 
+Clone this repo.  
+```
+% cd <app-events-download-path>
+% yarn install
+% yarn build
+```
+Create a subdirectory `app-events` under your public html website document root.  
 
-<!-- This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
+Upload the contents of the `build/` subdirectory to `app-events`  
+
+Open `https://yourwebsite.com/app-events/` on a web broswer.
+
+Have fun!
