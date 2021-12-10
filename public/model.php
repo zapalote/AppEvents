@@ -1,21 +1,6 @@
 <?php
-
 // Connect to the database
 require_once('config.php');
-if (!defined('STATS_LOCK')) {
-	header("HTTP/1.0 404 Not Found");
-	echo '
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-<html><head>
-<title>404 Not Found</title>
-</head><body>
-<h1>Not Found</h1>
-<p>The requested URL /db.php was not found on this server.</p>
-</body></html>';
-
-	exit();
-}
-
 ?>
 <!DOCTYPE html>
 <head>
@@ -25,7 +10,7 @@ if (!defined('STATS_LOCK')) {
 <?php
 
 $log_sql = "
-		CREATE TABLE IF NOT EXISTS `log` (
+		CREATE TABLE IF NOT EXISTS `{$log_table}` (
 		`src` INT(10) UNSIGNED NOT NULL,
 		`src6` binary(16) DEFAULT NULL,
 		`lex` varchar(40) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
@@ -39,7 +24,7 @@ $log_sql = "
 		) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
 
 if($db->query($log_sql)) {
-	echo "<p>log table created.....</p>";
+	echo "<p>{$log_table} table created.....</p>";
 } else {
 	echo "<p>Error defining log table: {$db->error}</p>";
 }

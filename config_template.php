@@ -8,7 +8,7 @@ define('STATS_DB_DEV_INI', "../private/inspira_stats.ini");
 define('STATS_DB_PROD_INI', "../../inspira.ini");
 define('STATS_SITE', "inspiratree.com");
 
-// backend constants don't change them
+// Don't change beyond here
 define('STATS_LOCK', true);
 
 // Connect to the database

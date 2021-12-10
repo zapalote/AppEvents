@@ -5,8 +5,9 @@
 /.pnp
 .pnp.js
 
-# testing
-/coverage
+# config
+config_template*
+deploy.py
 
 # production
 /build
