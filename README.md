@@ -42,7 +42,7 @@ such as to block non-admin access to it. On my hosting service the root path for
 `domains/mydomain.com/app-events.ini`  
 
 Only one table is needed to record app events. The name of the table is defined in the database `.ini` file. The table is created
-as the last step of the [installation](#installation)
+as part of the [installation](#installation).
 
 >**WARNING** This approach to storing db credentials is adequate for website event data but NOT safe for any sensitive data.
 DO NOT share one and the same database for logging and other data you may store as part of your 
@@ -135,12 +135,12 @@ Create a subdirectory `app-events` under your public html website document root.
 
 Upload the contents of the `build/` subdirectory to `app-events`  
 
-Update your html pages or app to start recording events ([see Logging above](#logging-events)).
-
 Create the log table by calling up once `https://yourwebsite.com/app-events/model.php`. If everything is configured properly,
-you should get a success message as result.
+you should get a success message as result. Upon success, the App Events manager is ready to work. 
 
-Upon success, the App Events manager is ready to work. Open the dashboard `https://yourwebsite.com/app-events/` on a web broswer
+Update your html pages or app to start submitting events ([see Logging above](#logging-events)).
+
+Open the dashboard `https://yourwebsite.com/app-events/` on a web broswer
 and check your results.
 
 Have fun!
