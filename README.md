@@ -49,7 +49,7 @@ website functionality.
 Only one table is needed to record app events. The name of the table is defined in the database `.ini` file. The table is created
 as part of the [installation](#installation).
 
-## Backend configuration
+## API configuration
 
 The backend API is configured via `public/config.php`. 
 ``` 
@@ -119,11 +119,12 @@ The minimum versions required for the backend are
 >`MariaDB Server version: 10.3.24-MariaDB-cll-lve`  
 >`PHP version: 5.5.38`
 
-# Dashboard app
 
-## Installation
+# Installation
 
 Clone this repo.  
+
+Follow the database creation instructions [as described above](#database).  
 
 Edit the file `public/config.js` and replace `<site_name>` with a name for your website or app (this name appears in the dashboard). 
 
