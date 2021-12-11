@@ -15,7 +15,7 @@ cloud based implementation to make it scale-up.
 In order to log events, your website or app needs to submit events through `HTTP GET` requests 
 to the [backend API](#logging). This is typically done through ajax javascript functions within your website pages, 
 or through a suitable logging function in your app. Said functionality is not part of this package, 
-nevertheless examples of such scripta are provided below ([see Logging](#logging-events)).
+nevertheless examples of such scripts are provided below ([see Logging](#logging-events)).
 
 
 # Backend setup and configuration
@@ -42,13 +42,12 @@ such as to block non-admin access to it. On my hosting service the root path for
 `domains/mydomain.com/public_html/` and the `.ini` files is located under 
 `domains/mydomain.com/app-events.ini`  
 
-Only one table is needed to record app events. The name of the table is defined in the database `.ini` file. The table is created
-as part of the [installation](#installation).
-
 >**WARNING** This approach to storing db credentials is adequate for website event data but NOT SAFE for any sensitive data.
 Also, DO NOT share one and the same database (and dbuser) for logging and other data you may store as part of your 
 website functionality. 
 
+Only one table is needed to record app events. The name of the table is defined in the database `.ini` file. The table is created
+as part of the [installation](#installation).
 
 ## Backend configuration
 
@@ -125,6 +124,7 @@ The minimum versions required for the backend are
 ## Installation
 
 Clone this repo.  
+
 Edit the file `public/config.js` and replace `<site_name>` with a name for your website or app (this name appears in the dashboard). 
 
 ```
