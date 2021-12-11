@@ -49,7 +49,7 @@ website functionality.
 Only one table is needed to record app events. The name of the table is defined in the database `.ini` file. The table is created
 as part of the [installation](#installation).
 
-The database requires about 75MB storage space for about 1 million records (events).
+The database requires about 75MB storage space for 1 million records (events).
 
 ## API configuration
 
