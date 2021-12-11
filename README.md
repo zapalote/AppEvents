@@ -124,7 +124,7 @@ The minimum versions required for the backend are
 
 Clone this repo.  
 
-Follow the database creation instructions and API config [as described above](#backend).  
+Follow the database creation instructions and API config [as described above](#database).  
 
 Edit the file `public/config.js` and replace `<site_name>` with a name for your website or app (this name appears in the dashboard). 
 
