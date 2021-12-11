@@ -1,6 +1,6 @@
 {
-  "short_name": "App Events Stats",
-  "name": "Usage Events Statistics fpr Apps",
+  "short_name": "App Events Manager",
+  "name": "User Engagement Statistics for Websites/Apps",
   "icons": [
     {
       "src": "favicon.ico",
