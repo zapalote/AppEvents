@@ -49,6 +49,8 @@ website functionality.
 Only one table is needed to record app events. The name of the table is defined in the database `.ini` file. The table is created
 as part of the [installation](#installation).
 
+The database requires about 75MB storage space for about 1 million records (events).
+
 ## API configuration
 
 The backend API is configured via `public/config.php`. 
@@ -118,7 +120,6 @@ No need to read any response, as the the log API returns nothing.
 The minimum versions required for the backend are  
 >`MariaDB Server version: 10.3.24-MariaDB-cll-lve`  
 >`PHP version: 5.5.38`
-
 
 # Installation
 
