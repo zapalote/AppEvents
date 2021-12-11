@@ -1,6 +1,6 @@
 # App Events manager
 
-This project implements a simple app events collection backend and a statistics dashboard (react) 
+This project implements a simple app events store backend and a statistics dashboard (react) 
 to visualize user engagement.
 
 ![AppEvents Dashboard](./app-events-dashboard.png)
@@ -13,9 +13,9 @@ it deployable on any small or medium site. It would be easy though to replace th
 cloud based implementation to make it scale-up.
 
 In order to log events, your website or app needs to submit events through `HTTP GET` requests 
-to the backend. This is typically done through ajax javascript functions within your website pages, 
+to the [backend API](#logging). This is typically done through ajax javascript functions within your website pages, 
 or through a suitable logging function in your app. Said functionality is not part of this package, 
-nevertheless an example of such a script is provided below ([see Logging](#logging-events)).
+nevertheless examples of such scripta are provided below ([see Logging](#logging-events)).
 
 
 # Backend setup and configuration
@@ -24,7 +24,8 @@ nevertheless an example of such a script is provided below ([see Logging](#loggi
 
 The mysql or mariadb software must be installed on the server before hand. 
 The database and its user credentials are created as a first step. 
-This is typically done via the mysql admin console (e.g. `phpMyAdmin`).
+This is typically done via the mysql admin console (e.g. `phpMyAdmin`). The dbuser requires `CREATE`, `INSERT` and
+`SELECT` privileges.  
 
 The db details and access credentials are stored in an `.ini` file in the following format
 ```
@@ -44,8 +45,8 @@ such as to block non-admin access to it. On my hosting service the root path for
 Only one table is needed to record app events. The name of the table is defined in the database `.ini` file. The table is created
 as part of the [installation](#installation).
 
->**WARNING** This approach to storing db credentials is adequate for website event data but NOT safe for any sensitive data.
-DO NOT share one and the same database for logging and other data you may store as part of your 
+>**WARNING** This approach to storing db credentials is adequate for website event data but NOT SAFE for any sensitive data.
+Also, DO NOT share one and the same database (and dbuser) for logging and other data you may store as part of your 
 website functionality. 
 
 
