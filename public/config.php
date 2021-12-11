@@ -6,7 +6,7 @@ setlocale(LC_TIME, 'en_NL');
 // App wide constants, these will get overwritten
 define('STATS_DB_DEV_INI', "../../private/app-event.ini");
 define('STATS_DB_PROD_INI', "../../app-events.ini");
-define('STATS_SITE', "inspiratree.com");
+define('STATS_SITE', "mywebsite.com");
 
 // Don't change beyond here
 define('STATS_LOCK', true);
