@@ -94,7 +94,7 @@ script snippet like this
   fetch('app-events/log.php?log=homepage&r=${ref}&l=${landing}');
 </script>
 ```
-provided the package has been deployed under a subdirectory `app-events/` under the website doc root.
+provided the package has been deployed on a subdirectory `/app-events/` under the website doc root.
 No need to read any response, as the the log API returns nothing.
 
 **Example 2** — Signaling "contact me" button results 
