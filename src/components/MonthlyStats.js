@@ -106,7 +106,7 @@ const MonthlyStats = () => {
     <div>
       {loading ?
         <LoadingIndicator coverall={false} fill='#6b966b' /> :
-        (!results || typeof results.months === 'undefined' ? <NoResults /> : <ListResults />)
+        ((!results || typeof results.months === 'undefined') ? <NoResults /> : <ListResults />)
       }
     </div>
   );
