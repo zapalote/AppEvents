@@ -1,6 +1,6 @@
 # App Events manager
 
-This project implements a simple app events store backend and a statistics dashboard (react) 
+This project implements a proof-of-concept app events store backend and a statistics dashboard (react) 
 to visualize user engagement.
 
 ![AppEvents Dashboard](./app-events-dashboard.png)
