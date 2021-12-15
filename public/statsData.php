@@ -159,16 +159,15 @@ function monthlyStats() {
     $chart[$e[0]] = $e[2];
   }
 
-  for ($i = 17; $i >= 0; $i--) {
+  for ($i = 18; $i >= 0; $i--) {
     $dd =  date("M-y", strtotime('-' . $i . ' months'));
-    $days[$dd] = 0;
+    $months[$dd] = 0;
   }
 
-  ksort($chart);
+  ksort($days);
   foreach ($chart as $k => $v) {
     $dd = date("M-y", strtotime($k));
-    $days[$dd] = $chart[$k];
-    // unset($chart[$k]);
+    $months[$dd] = $chart[$k];
   }
 
   $month = date('F');
@@ -184,7 +183,7 @@ function monthlyStats() {
     "sessions" => $s,
     "hits" => $c,
     "forecast" => $fc,
-    "chart" => $days,
+    "chart" => $months,
     "logsize" => $e[0]
   );
   echo json_encode($results);
@@ -231,8 +230,7 @@ function forecastMonth() {
   $days_in_month = date("t");
   $wemonth = 8;
   $wdmonth = $days_in_month - $wemonth;
-  $forecast = round($weavg * $wemonth + $wdavg * $wdmonth);
-  return $forecast;
+  return round($weavg * $wemonth + $wdavg * $wdmonth);
 }
 
 // ----------------- IP popup -----------------
@@ -243,7 +241,7 @@ function ipPopup($l){
   $l = base64_decode($l);
   $sql = "select lex, acc from {$log_table} 
 		where src=INET_ATON('{$l}') or src6=INET6_ATON('{$l}') 
-		order by upd desc limit 10";
+		order by upd asc limit 10";
   $res = $db->query($sql);
 
   while ($e = $res->fetch_row()) {
@@ -289,11 +287,10 @@ function thirtyStats($l) {
 		$chart[$e[0]] = $e[1];
 	}
 
-	for($i = 0; $i < 30; $i++){
+	for($i = 30; $i >= 0 ; $i--){
 		$dd =  date("D j-M", strtotime('-'. $i .' days'));
 	  $days[$dd] = 0;
 	}
-	ksort($chart);
 	foreach ($chart as $k => $v) {
 		$dd = date("D j-M", strtotime($k));
 		$days[$dd] = $chart[$k];
@@ -330,7 +327,7 @@ function twentyfourStats($l) {
     return;
   }
 
-  for ($i = 0; $i < 24; $i++) {
+  for ($i = 23; $i >= 0; $i--) {
     $hh = date("H", strtotime('-' . $i . ' hours'));
     $chart['h'.$hh] = 0;
   }
@@ -344,7 +341,7 @@ function twentyfourStats($l) {
     if($past_midnight && substr($e[2], 0, 10) != $midnight){
       $rowsep[] = 1;
       $past_midnight = false;
-    } else $rowsep [] = 0;
+    } else { $rowsep [] = 0; }
     $ddd = substr($e[2], 11, 2);
     $chart['h'.$ddd] += $e[1];
   }
