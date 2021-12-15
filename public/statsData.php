@@ -170,7 +170,6 @@ function monthlyStats() {
     $months[$dd] = $chart[$k];
   }
 
-  $month = date('F');
   $fc = forecastMonth();
 
   $sql = "select round(((data_length + index_length) / 1024 / 1024), 2)
