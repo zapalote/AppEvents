@@ -52,21 +52,22 @@ const TopicsStats = () => {
     }
     for (const [k, v] of Object.entries(results.topall)) {
       all.push([k, v]);
+      console.log(k, v);
     }
 
     return (
       <>
-      { table && (
-        <>
-          <h3>Top topics last 30 days
-            <div className="btns">
-              <div onClick={handleDone} className="button" >Done</div>
-            </div>
-          </h3>
-          <StatsTable headings={['Topic', 'Hits']} data={table} />
-        </>
-      )}
-        <h3>Topic ranking
+        {table && (
+          <>
+            <h3>Top topics last 30 days {table.length < 300? '' : '(top 300)'}
+              <div className="btns">
+                <div onClick={handleDone} className="button" >Done</div>
+              </div>
+            </h3>
+            <StatsTable headings={['Topic', 'Hits']} data={table} />
+          </>
+        )}
+        <h3>Topic ranking {table.length < 300 ? '' : '(top 300)'}
           <div className="btns">
             <div onClick={handleDone} className="button" >Done</div>
           </div>

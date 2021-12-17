@@ -48,17 +48,20 @@ function searchStats() {
   global $db, $log_table;
 
   # most clicked last 30 days
-  $sql = "select l, sum(c) from (
+  $sql = "select l, sum(c) as cnt from (
 				select lex as l, count(*) as c from {$log_table} 
-				where upd >= date_sub(now(),interval 30 day) and src > 0 group by l
+				where upd >= date_sub(now(),interval 30 day) and src > 0 group by l 
 			union
 				select lex as l, count(*) as c from {$log_table} 
-				where upd >= date_sub(now(),interval 30 day) and src6 is not null group by l
-			) t group by l";
+				where upd >= date_sub(now(),interval 30 day) and src6 is not null group by l 
+			) t group by l order by cnt desc";
 
+  //  limit the results size to max_rows due to react mem-overflow
+  $max_rows = 300;
   $res = $db->query($sql);
   $words = [];
   while ($e = $res->fetch_row()) {
+    if ($max_rows-- == 0) break;
     $word = $e[0];
     if (isset($words[$word])) {
       $words[$word] += $e[1];
@@ -66,20 +69,23 @@ function searchStats() {
       $words[$word] = $e[1];
     }
   }
+  $res->close();
   arsort($words);
 
   # most clicked events
-  $sql = "select l, sum(c) from (
+  $sql = "select l, sum(c) as cnt from (
 				select lex as l, count(*) as c from {$log_table} 
 				where src > 0 group by l
 			union
 				select lex as l, count(*) as c from {$log_table} 
 				where src6 is not null group by l
-			) t group by l";
+			) t group by l order by cnt desc";
 
   $all = [];
+  $max_rows = 300;
   $res = $db->query($sql);
   while ($e = $res->fetch_row()) {
+    if ($max_rows-- == 0) break;
     $word = $e[0];
     if (isset($all[$word])) {
       $all[$word] += $e[1];
