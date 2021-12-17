@@ -61,21 +61,22 @@ const StatsTable = (props) => {
 
   const computeTotals = (table, cols) => {
     if(cols === 0) return [];
-    let totals = new Array(cols).fill(0);
+    let sums = new Array(cols).fill(0);
     const notNumber = /[^\d]/g;
     table.forEach((row) => {
       row.forEach((col, i) => {
         if (typeof col === 'string' && col.search(notNumber) >= 0) {
-          totals[i] = '';
+          sums[i] = '';
         } else {
-          totals[i] += parseInt(col);
+          sums[i] += parseInt(col);
         }
       })
     });
-    return totals.slice(1)
+    return sums.slice(1)
   }
 
   const nCols = (data[0] && Object.keys(data[0]).length) || 0;
+  const nRows = (data[0] && data.length) || 0;
   const totals = computeTotals(data, nCols);
   const [sortKeys, setSortKeys] = useState([]);
   useEffect(() => {
@@ -110,10 +111,10 @@ const StatsTable = (props) => {
             </tr>
           ))}
         </tbody>
-        {totals[0] ? (
+        {nRows ? (
           <tfoot>
             <tr>
-              <td>Totals</td>
+              <td>{nRows} rows</td>
               {totals.map((td, tx) => (<td key={'f'+tx}>{td}</td>))}
             </tr>
           </tfoot>
