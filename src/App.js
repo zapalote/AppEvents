@@ -5,7 +5,6 @@ import { TwentyfourStats, ThirtyStats, MonthlyStats, ReferralStats, TopicsStats 
 const App = () => {
   const title = window.APP_TITLE;
   const version = `${(process.env.REACT_APP_NAME)} v${(process.env.REACT_APP_VERSION)}`
-  const homeUri = (process.env.NODE_ENV === 'development') ? '/' : '/app-events';
 
   useEffect(() => {
     // APP_TITLE is set when deploying through config_template.js
@@ -15,7 +14,7 @@ const App = () => {
   const AppInfo = () => {
     return (
       <div style = {{ float: 'right', fontSize: '0.8em', color: '#ccc', margin: '1em' }} >
-        {version} on {homeUri}
+        {version}
       </div >
     )
   }
@@ -26,7 +25,7 @@ const App = () => {
       <div id="app" className="App">
       <h2>{title}</h2>
       <div>
-        <Routes homebase={homeUri}>
+        <Routes homebase={process.env.PUBLIC_URL}>
           <Route path="/" element={<TwentyfourStats />} />
           <Route path="d/:date" element={<TwentyfourStats />} />
           <Route path="30" element={<ThirtyStats />} />

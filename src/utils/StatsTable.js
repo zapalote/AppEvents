@@ -65,10 +65,11 @@ const StatsTable = (props) => {
     const notNumber = /[^\d]/g;
     table.forEach((row) => {
       row.forEach((col, i) => {
-        if (typeof col === 'string' && col.search(notNumber) >= 0) {
+        const n = parseInt(col);
+        if (isNaN(n) || (typeof col === 'string' && col.search(notNumber) >= 0)) {
           sums[i] = '';
         } else {
-          sums[i] += parseInt(col);
+          sums[i] += n;
         }
       })
     });
@@ -94,7 +95,7 @@ const StatsTable = (props) => {
           <tr>
             {headings.map((heading, idx) => (
               <th key={"th" + idx} onClick={() => requestSort(sortKeys[idx])}
-                className={getClassNamesFor(sortKeys[idx])}><img className='sortable-icon' src={Sortable} alt="sortable" />{heading}
+                className={getClassNamesFor(sortKeys[idx])}><img className='sortableicon' src={Sortable} alt="sortable" />{heading}
               </th>
               )
             )}
