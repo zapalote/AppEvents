@@ -7,6 +7,8 @@ to visualize user engagement.
 
 The original motivation was to allow for interactive websites to record and analyze anonymous 
 usage data **without** using cookies or tracking software.
+[This article](https://hackernoon.com/lets-kill-cookies-my-poc-for-a-less-creepy-way-to-track-engagement) 
+describes the approach in detail.
 
 The current implementation is based on a simple LAMP (Linux/Apache/MySQL/PHP) architecture to make 
 it deployable on any small or medium site. It would be easy though to replace the backend with a 
