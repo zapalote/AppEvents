@@ -52,7 +52,6 @@ const TopicsStats = () => {
     }
     for (const [k, v] of Object.entries(results.topall)) {
       all.push([k, v]);
-      console.log(k, v);
     }
 
     return (
