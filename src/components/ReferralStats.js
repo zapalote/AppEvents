@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { LoadingIndicator } from '.';
-import { getApi, StatsTable } from '../utils';
+import { LoadingIndicator, StatsTable } from '.';
+import { getApi } from '../utils';
 import { useNavigate } from 'react-router-dom';
 
 const ReferralStats = () => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { LoadingIndicator } from '.';
-import { getApi, SimpleChart, StatsTable } from '../utils';
+import { LoadingIndicator, SimpleChart, StatsTable } from '.';
+import { getApi } from '../utils';
 import { useNavigate } from 'react-router-dom';
 
 const MonthlyStats = () => {
@@ -65,12 +65,10 @@ const MonthlyStats = () => {
 
   const NoResults = () => {
     return (
-      <div>
-        <div>
-          <button type="button" onClick={handleDone} className="button" >Done</button>
-        </div>
+      <>
         <h3>No Results Available</h3>
-      </div>
+        <div onClick={handleDone} className="button" >Done</div> 
+      </>
     );
   }
 

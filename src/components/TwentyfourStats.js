@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { LoadingIndicator } from '.';
-import { getApi, SimpleChart, StatsTable, anonIP } from '../utils';
+import { LoadingIndicator, SimpleChart, StatsTable, IPpopUp } from '.';
+import { getApi, anonIP } from '../utils';
 import { useNavigate, useParams } from 'react-router-dom';
-import { IPpopUp } from "../utils";
 
 const TwentyfourStats = () => {
   const params = useParams();

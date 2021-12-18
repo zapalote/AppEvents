@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { LoadingIndicator } from '.';
-import { getApi, SimpleChart, StatsTable } from '../utils';
+import { LoadingIndicator, SimpleChart, StatsTable } from '.';
+import { getApi } from '../utils';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const ThirtyStats = () => {

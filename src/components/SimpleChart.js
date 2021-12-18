@@ -162,8 +162,8 @@ const SimpleChart = (props) => {
         switch (config.type) {
           case 'bar':
             return <BarChart />
-          default:
           case 'column':
+          default:
             return <ColumnChart />
         }
       })()}

@@ -170,7 +170,6 @@ function monthlyStats() {
     $months[$dd] = 0;
   }
 
-  ksort($days);
   foreach ($chart as $k => $v) {
     $dd = date("M-y", strtotime($k));
     $months[$dd] = $chart[$k];
