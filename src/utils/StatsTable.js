@@ -114,7 +114,7 @@ const StatsTable = (props) => {
         {nRows ? (
           <tfoot>
             <tr>
-              <td>{nRows} rows</td>
+              <td>{nRows} <span style={{color: '#aaa'}}>rows</span></td>
               {totals.map((td, tx) => (<td key={'f'+tx}>{td}</td>))}
             </tr>
           </tfoot>
