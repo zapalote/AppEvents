@@ -28,10 +28,9 @@ if(isset($_REQUEST['log'])){
 	$ref = ($ref) ? "'$ref'" : "NULL";
 	$lnd = ($land) ? "'$land'" : "NULL";
 	$sql = (strstr($ip, ':')) ?
-		"insert into log ( lex, src, src6, acc, refer, landing ) values ( '$q', 0, INET6_ATON('$ip'), '$acc', $ref, $lnd )" :
-		"insert into log ( lex, src, acc, refer, landing ) values ( '$q', INET_ATON('$ip'), '$acc', $ref, $lnd )";
+		"insert into $log_table ( lex, src, src6, acc, refer, landing ) values ( '$q', 0, INET6_ATON('$ip'), '$acc', $ref, $lnd )" :
+		"insert into $log_table ( lex, src, acc, refer, landing ) values ( '$q', INET_ATON('$ip'), '$acc', $ref, $lnd )";
 	$db->query($sql);
-	// echo $db->error;
 	$db->close();
 }
 
