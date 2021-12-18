@@ -23,6 +23,7 @@ if(isset($_REQUEST['log'])){
 	$ua = $_SERVER['HTTP_USER_AGENT'];
  	$acc = (isMobile($ua))? '1' : '0';
 
+	// get the logger's IP address
 	$ip = getUserIpAddr();
 
 	$ref = ($ref) ? "'$ref'" : "NULL";
