@@ -9,6 +9,7 @@ const App = () => {
   const version = `${(process.env.REACT_APP_NAME)} v${(process.env.REACT_APP_VERSION)}`
 
   useEffect(() => {
+    // set the page title
     document.title = title;
   }, []);
 
