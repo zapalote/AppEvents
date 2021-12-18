@@ -3,23 +3,21 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { TwentyfourStats, ThirtyStats, MonthlyStats, ReferralStats, TopicsStats } from './components';
 
 const App = () => {
+   // APP_TITLE is defined in public/config.js
   const title = window.APP_TITLE;
+  // process.env.VARIABLES are defined in the .env file 
   const version = `${(process.env.REACT_APP_NAME)} v${(process.env.REACT_APP_VERSION)}`
 
   useEffect(() => {
-    // APP_TITLE is set when deploying through config_template.js
-    document.title = window.APP_TITLE;
+    document.title = title;
   }, []);
 
   const AppInfo = () => {
     return (
-      <div style = {{ float: 'right', fontSize: '0.8em', color: '#ccc', margin: '1em' }} >
-        {version}
-      </div >
+      <div style = {{ float: 'right', fontSize: '0.8em', color: '#ccc', margin: '1em' }} > {version} </div>
     )
   }
 
-  console.log();
   return (
     <Router>
       <div id="app" className="App">
