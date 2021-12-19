@@ -93,7 +93,7 @@ script snippet like this
 <script>
   const ref = encodeURIComponent(document.referrer);
   const landing = encodeURIComponent(window.location.href);
-  fetch('app-events/log.php?log=homepage&r=${ref}&l=${landing}');
+  fetch(\`app-events/log.php?log=homepage&r=${ref}&l=${landing}\`);
 </script>
 ```
 provided the package has been deployed on a subdirectory `/app-events/` under the website doc root.
@@ -105,7 +105,7 @@ No need to read any response, as the the log API returns nothing.
   const contactEvent = () => {
     // contact me 
     if(!confirm("Would you like to open your mail client?")){
-          fetch('app-events/log.php?log=contact-nok');
+          fetch(\`app-events/log.php?log=contact-nok\`);
           return false;
     } 
     fetch('app-events/log.php?log=contact-ok');
