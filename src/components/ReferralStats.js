@@ -48,7 +48,7 @@ const ReferralStats = () => {
     let table = [];
     let all = [];
     let bots = [];
-    results.referrals && results.referrals.forEach((ref, idx) => {
+    results.referrals?.forEach((ref, idx) => {
       table.push([ref, results.landing[idx], results.times[idx].substr(11)]);
     });
     for (const [k, v] of Object.entries(results.all)) {
