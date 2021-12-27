@@ -129,6 +129,9 @@ footer {
 .mobile {
 	color: green;
 }
+.robot {
+	color: grey;
+}
 @media (max-width: 480px) {
 	/* mobile */
 	.container { width: 100%; margin: auto; font-size: 0.9em; max-width: 480px;}

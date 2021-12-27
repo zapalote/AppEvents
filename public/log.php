@@ -10,18 +10,31 @@ if(isset($_REQUEST['log'])){
 	$q = mb_strtolower(preg_replace('/[;\.\&\@\*\%\"_\']+/', ' ', $_REQUEST['log']), 'UTF-8');
 	$q = trim(preg_replace('/\s+/', ' ', $q));
 	// referrer
-	$site_regex = "/^".STATS_SITE."\//";
-	$ref = mb_strtolower(preg_replace('/^(http|https)\:\/\//', '', $_REQUEST['r']), 'UTF-8');
-	$ref = preg_replace($site_regex, '', $ref);
-	$ref = preg_replace('/\/.*$/', '', $ref);
+	$ref = '';
+	if(isset($_REQUEST['r'])) {
+		$site_regex = "/^" . STATS_SITE . "\//";
+		$ref = mb_strtolower(preg_replace('/^(http|https)\:\/\//', '', $_REQUEST['r']), 'UTF-8');
+		$ref = preg_replace($site_regex, '', $ref);
+		$ref = preg_replace('/\/.*$/', '', $ref);
+	}
 	// landing
-	$land = preg_replace('/^(http|https)\:\/\//', '', $_REQUEST['l']);
-	$land = preg_replace($site_regex, '', $land);
-	$land = preg_replace('/\/$/', '', $land);
+	$land = '';
+	if(isset($_REQUEST['l'])) {
+		$land = preg_replace('/^(http|https)\:\/\//', '', $_REQUEST['l']);
+		$land = preg_replace($site_regex, '', $land);
+		$land = preg_replace('/\/$/', '', $land);
+	}
 
-	// desktop == 0; mobile == 1
-	$ua = $_SERVER['HTTP_USER_AGENT'];
- 	$acc = (isMobile($ua))? '1' : '0';
+	// acc: desktop == 0; mobile == 1; robot == 9
+	$ua = isset($_REQUEST['ua'])? $_REQUEST['ua'] : $_SERVER['HTTP_USER_AGENT'];
+	$r = isRobot($ua);
+	if($r) {
+		$acc = '9';
+		$land = $q;
+		$ref = $r;
+	} else {
+		$acc = (isMobile($ua)) ? '1' : '0';
+	}
 
 	// get the logger's IP address
 	$ip = getUserIpAddr();
@@ -46,6 +59,14 @@ function getUserIpAddr() {
 		$ip = $_SERVER['REMOTE_ADDR'];
 	}
 	return $ip;
+}
+
+function isRobot($ua) {
+	if (preg_match('/(googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|sogou|exabot|konqueror|facebot|ia_archiver)/i', $ua, $m))	{
+		return $m[1];
+	}
+	return '';
+
 }
 
 function isMobile($useragent) {

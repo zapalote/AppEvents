@@ -50,10 +50,10 @@ function searchStats() {
   # most clicked last 30 days
   $sql = "select l, sum(c) as cnt from (
 				select lex as l, count(*) as c from {$log_table} 
-				where upd >= date_sub(now(),interval 30 day) and src > 0 group by l 
+				where upd >= date_sub(now(),interval 30 day) and src > 0 and acc != 9 group by l 
 			union
 				select lex as l, count(*) as c from {$log_table} 
-				where upd >= date_sub(now(),interval 30 day) and src6 is not null group by l 
+				where upd >= date_sub(now(),interval 30 day) and src6 is not null and acc != 9 group by l 
 			) t group by l order by cnt desc";
 
   //  limit the results size to max_rows due to react mem-overflow
@@ -75,10 +75,10 @@ function searchStats() {
   # most clicked events
   $sql = "select l, sum(c) as cnt from (
 				select lex as l, count(*) as c from {$log_table} 
-				where src > 0 group by l
+				where src > 0 and acc != 9 group by l
 			union
 				select lex as l, count(*) as c from {$log_table} 
-				where src6 is not null group by l
+				where src6 is not null and acc != 9 group by l
 			) t group by l order by cnt desc";
 
   $all = [];
@@ -106,9 +106,9 @@ function searchStats() {
 function referStats() {
   // referral stats
   global $db, $log_table;
-
+  // referrals last 24 hrs 
   $sql = "select refer, landing, upd from {$log_table} 
-				where upd >= date_sub(now(),interval 23 hour) and refer is not null 
+				where upd >= date_sub(now(),interval 23 hour) and refer is not null and acc != 9
         order by upd desc";
   $res = $db->query($sql);
 
@@ -124,21 +124,38 @@ function referStats() {
   $t = isset($upd[0])? $upd[0] : 'today midnight';
   $last = deriveDay(strtotime($t));
 
-  # most referrals
+  # referrals ranking 30 days
   $sql = "select refer as r, count(*) as c from {$log_table} 
-				where refer is not null and upd >= date_sub(now(),interval 30 day) group by r order by c desc";
+				where refer is not null and acc != 9 and upd >= date_sub(now(),interval 30 day) group by r order by c desc";
 
   $res = $db->query($sql);
   $allrefs = [];
   while ($e = $res->fetch_row()) {
     $allrefs[$e[0]] = $e[1];
   }
+
+  //  robots last 24 hrs
+  $sql = "select refer, landing, upd from {$log_table} 
+				where upd >= date_sub(now(),interval 23 hour) and refer is not null and acc = 9
+        order by upd desc";
+  $res = $db->query($sql);
+
+  $bots = [];
+  $botsland = [];
+  $botsupd = [];
+  while ($e = $res->fetch_row()) {
+    $bots[] = $e[0];
+    $botsland[] = $e[1];
+    $botsupd[] = $e[2];
+  }
+
   $results = array(
     "last" => $last,
     "referrals" => $refs,
     "landing" => $land,
     "times" => $upd,
-    "all" => $allrefs
+    "all" => $allrefs,
+    "bots" => array("ref" => $bots, "land" => $botsland, "upd" => $botsupd)
   );
   echo json_encode($results);
 }
@@ -152,10 +169,10 @@ function monthlyStats() {
   $months18 = date('Y-m-d', strtotime("-17 months", strtotime($month_beg)));
   $sql = "select d, sum(u), sum(c) from (
 				select date_format(upd, '%Y-%m') as d, count(distinct INET_NTOA(src)) as u, count(*) as c from {$log_table}
-					where src != 0 and upd > '{$months18}' group by d desc
+					where src != 0 and upd > '{$months18}' and acc != 9 group by d desc
 				union
 				select date_format(upd, '%Y-%m') as d, count(distinct INET6_NTOA(src6)) as u, count(*) as c from {$log_table}
-					where src6 is not null and upd > '{$months18}' group by d desc
+					where src6 is not null and upd > '{$months18}' and acc != 9 group by d desc
 			) t group by d order by d desc";
   $res = $db->query($sql);
   while ($e = $res->fetch_row()) {
@@ -200,10 +217,10 @@ function forecastMonth() {
   $da = "upd >= date_sub(curdate(), interval 30 day)";
   $sql = "select d, sum(c) from (
 				select date(upd) as d, count(*) as c from {$log_table}
-					where {$da} and src != 0 group by d desc
+					where {$da} and src != 0 and acc != 9 group by d desc
 				union
 				select date(upd) as d, count(*) as c from {$log_table}
-					where {$da} and src6 is not null group by d desc
+					where {$da} and src6 is not null and acc != 9 group by d desc
 			) t group by d order by d asc";
   $res = $db->query($sql);
   $days = 0;
@@ -245,12 +262,23 @@ function ipPopup($l){
   $l = base64_decode($l);
   $sql = "select lex, acc from {$log_table} 
 		where src=INET_ATON('{$l}') or src6=INET6_ATON('{$l}') 
-		order by upd asc limit 10";
+		order by upd desc limit 10";
   $res = $db->query($sql);
 
   while ($e = $res->fetch_row()) {
     $ev[] = $e[0];
-    $typ[] = ($e[1] == 0)? 'desktop' : 'mobile';
+    switch($e[1]) {
+      default:
+      case 0:
+        $typ[] = 'desktop';
+        break;
+      case 1:
+        $typ[] = 'mobile';
+        break;
+      case 9:
+        $typ[] = 'robot';
+        break;
+    }
   } 
 
   $results = array(
@@ -278,10 +306,10 @@ function thirtyStats($l) {
 
 	$sql = "select d, sum(u), sum(c) from (
 				select date(upd) as d, count(distinct INET_NTOA(src)) as u, count(*) as c from {$log_table}
-					where ${da} and src != 0 group by d desc
+					where ${da} and src != 0 and acc != 9 group by d desc
 				union
 				select date(upd) as d, count(distinct INET6_NTOA(src6)) as u, count(*) as c from {$log_table}
-					where ${da} and src6 is not null group by d desc
+					where ${da} and src6 is not null and acc != 9 group by d desc
 			) t group by d order by d desc";
 	$res = $db->query($sql);
 	while ($e = $res->fetch_row()) {
@@ -317,11 +345,11 @@ function twentyfourStats($l) {
   $dq = ($l) ? "date(upd) = '{$l}'" : "upd >= date_sub(now(),interval 23 hour)";
   $sql = "select ip, cnt, u from (
 				select INET_NTOA(src) as ip, count(*) as cnt, max(upd) as u from {$log_table} 
-				where {$dq} and src != 0 
+				where {$dq} and src != 0 and acc != 9
 				group by ip
 				union
 				select INET6_NTOA(src6) as ip, count(*) as cnt, max(upd) as u from {$log_table} 
-				where {$dq} and src6 is not null 
+				where {$dq} and src6 is not null and acc != 9
 				group by ip
 			) t order by u desc";
   $res = $db->query($sql);

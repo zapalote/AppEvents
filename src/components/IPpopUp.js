@@ -13,6 +13,7 @@ const IPpopUp = (props) => {
     setShow(props.show);
   }, [props.show]);
 
+  // possible data.type values are: 'desktop', 'mobile' and 'robot'
   return (
     <>
       {show ?

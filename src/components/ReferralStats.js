@@ -47,25 +47,39 @@ const ReferralStats = () => {
 
     let table = [];
     let all = [];
+    let bots = [];
     results.referrals && results.referrals.forEach((ref, idx) => {
       table.push([ref, results.landing[idx], results.times[idx].substr(11)]);
     });
     for (const [k, v] of Object.entries(results.all)) {
       all.push([k, v]);
     }
+    results.bots.ref?.forEach((ref, idx) => {
+      bots.push([ref, results.bots.land[idx], results.bots.upd[idx].substr(11)]);
+    });
 
     return (
       <>
-      { table && (
-        <>
-          <h3>Referrals {results.last}
-            <div className="btns">
-              <div onClick={handleDone} className="button" >Done</div>
-            </div>
-          </h3>
-          <StatsTable headings={['Referral', 'Landing', 'Time']} data={table} />
-        </>
-      )}
+        { table && (
+          <>
+            <h3>Referrals {results.last}
+              <div className="btns">
+                <div onClick={handleDone} className="button" >Done</div>
+              </div>
+            </h3>
+            <StatsTable headings={['Referral', 'Landing', 'Time']} data={table} />
+          </>
+        )}
+        {bots && (
+          <>
+            <h3>Robots (last 24hrs)
+              <div className="btns">
+                <div onClick={handleDone} className="button" >Done</div>
+              </div>
+            </h3>
+            <StatsTable headings={['Robots', 'Landing', 'Time']} data={bots} />
+          </>
+        )}
         <h3>All referrals 
           <div className="btns">
             <div onClick={handleDone} className="button" >Done</div>
