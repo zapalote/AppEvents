@@ -77,7 +77,7 @@ const MonthlyStats = () => {
 
     let table = [];
     let drill = [];
-    results.months.forEach((m, idx) => {
+    results.months?.forEach((m, idx) => {
       drill.push('/30/'+m);
       table.push([m, results.sessions[idx], results.hits[idx]]);
     });

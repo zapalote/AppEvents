@@ -82,7 +82,7 @@ const ThirtyStats = () => {
 
     let table = [];
     let drill = [];
-    results.date.forEach((d, idx) => {
+    results.date?.forEach((d, idx) => {
       drill.push('/d/'+d);
       const date = new Date(d).toString().split(' ');
       table.push([`${date[0]}, ${date[2]} ${date[1]}`, results.sessions[idx], results.hits[idx]]);

@@ -41,9 +41,9 @@ const TwentyfourStats = () => {
     if (!values) return { chartCfg, chart, labels, tooltips };
 
     for( const [k, v] of Object.entries(values)){
-      labels.push(k.substr(1));
+      labels.push(k.substring(1));
       chart.push(v);
-      tooltips.push(k.substr(1));
+      tooltips.push(k.substring(1));
     }
     let wh = '300px';
     let ctype = 'column';
@@ -66,7 +66,7 @@ const TwentyfourStats = () => {
   }
 
   const onPopUP = (ip) => {
-    getApi({ url: '?pip='+btoa(ip) })
+    getApi({ url: '?pip='+window.btoa(ip) })
       .then(data => {
           setIpEvents(data);
           setShowPopup(true);
@@ -87,7 +87,7 @@ const TwentyfourStats = () => {
     let popupLinks = [];
     let table = [];
     let rowsep = [];
-    results.ips.forEach((ip, idx) => {
+    results.ips?.forEach((ip, idx) => {
       table.push([anonIP(ip), results.hits[idx], results.times[idx].substr(11)]);
       popupLinks.push(ip);
       rowsep.push([results.rowsep[idx]]);
