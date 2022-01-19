@@ -1,13 +1,9 @@
 <?php
+header('Content-Type: text/plain');
+
 // Connect to the database
 require_once('config.php');
-?>
-<!DOCTYPE html>
-<head>
-	<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-</head>
-<body>
-<?php
+global $db, $log_table;
 
 $log_sql = "
 		CREATE TABLE IF NOT EXISTS `{$log_table}` (
@@ -22,16 +18,11 @@ $log_sql = "
 	) ENGINE=MyISAM DEFAULT CHARSET=utf8;";
 
 if($db->query($log_sql)) {
-	echo "<p>{$log_table} table created.....</p>";
+	echo "{$log_table} table created.....";
 } else {
-	echo "<p>Error defining log table: {$db->error}</p>";
+	echo "Error defining {$log_table} table: {$db->error}";
 }
 
 $db->close();
 
-// alter table log modify src varbinary(16) not null
-// UPDATE log SET src = INET6_ATON(INET_NTOA(src)), upd=upd
-// UPDATE log SET src = src6, upd=upd where src6 is not null
 ?>
-</body>
-</html>
