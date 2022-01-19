@@ -7,7 +7,8 @@ const anonIP = (ip) => {
 
   let m = 0;
   for(let j = 0; j < 4; j++){
-    const a = (isIP6) ? parseInt(parts[j], 16) : parts[j];
+    const p = (parts[j])? parts[j] : 0;
+    const a = (isIP6) ? parseInt(p, 16) : p;
     m += parseInt(a) + (j * 255);
   }
   return m;

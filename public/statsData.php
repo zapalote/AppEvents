@@ -48,13 +48,8 @@ function searchStats() {
   global $db, $log_table;
 
   # most clicked last 30 days
-  $sql = "select l, sum(c) as cnt from (
-				select lex as l, count(*) as c from {$log_table} 
-				where upd >= date_sub(now(),interval 30 day) and src > 0 and acc != 9 group by l 
-			union
-				select lex as l, count(*) as c from {$log_table} 
-				where upd >= date_sub(now(),interval 30 day) and src6 is not null and acc != 9 group by l 
-			) t group by l order by cnt desc";
+  $sql = "select lex as l, count(*) as c from {$log_table} 
+				where upd >= date_sub(now(),interval 30 day) and acc != 9 group by l order by c desc";
 
   //  limit the results size to max_rows due to react mem-overflow
   $max_rows = 300;
@@ -73,13 +68,8 @@ function searchStats() {
   arsort($words);
 
   # most clicked events
-  $sql = "select l, sum(c) as cnt from (
-				select lex as l, count(*) as c from {$log_table} 
-				where src > 0 and acc != 9 group by l
-			union
-				select lex as l, count(*) as c from {$log_table} 
-				where src6 is not null and acc != 9 group by l
-			) t group by l order by cnt desc";
+  $sql = "select lex as l, count(*) as c from {$log_table} 
+				where acc != 9 group by l order by c desc";
 
   $all = [];
   $max_rows = 300;
@@ -167,13 +157,8 @@ function monthlyStats() {
 
   $month_beg = date('Y-m-01', time());
   $months18 = date('Y-m-d', strtotime("-17 months", strtotime($month_beg)));
-  $sql = "select d, sum(u), sum(c) from (
-				select date_format(upd, '%Y-%m') as d, count(distinct INET_NTOA(src)) as u, count(*) as c from {$log_table}
-					where src != 0 and upd > '{$months18}' and acc != 9 group by d desc
-				union
-				select date_format(upd, '%Y-%m') as d, count(distinct INET6_NTOA(src6)) as u, count(*) as c from {$log_table}
-					where src6 is not null and upd > '{$months18}' and acc != 9 group by d desc
-			) t group by d order by d desc";
+  $sql = "select date_format(upd, '%Y-%m') as d, count(distinct INET6_NTOA(src)) as u, count(*) as c from {$log_table}
+					where upd > '{$months18}' and acc != 9 group by d order by d desc";
   $res = $db->query($sql);
   while ($e = $res->fetch_row()) {
     $d[] = $e[0];
@@ -215,13 +200,8 @@ function forecastMonth() {
   global $db, $log_table;
 
   $da = "upd >= date_sub(curdate(), interval 30 day)";
-  $sql = "select d, sum(c) from (
-				select date(upd) as d, count(*) as c from {$log_table}
-					where {$da} and src != 0 and acc != 9 group by d desc
-				union
-				select date(upd) as d, count(*) as c from {$log_table}
-					where {$da} and src6 is not null and acc != 9 group by d desc
-			) t group by d order by d asc";
+  $sql = "select date(upd) as d, count(*) as c from {$log_table}
+					where {$da} and acc != 9 group by d order by d asc";
   $res = $db->query($sql);
   $days = 0;
   $wd = 0;
@@ -261,8 +241,7 @@ function ipPopup($l){
 
   $l = base64_decode($l);
   $sql = "select lex, acc from {$log_table} 
-		where src=INET_ATON('{$l}') or src6=INET6_ATON('{$l}') 
-		order by upd desc limit 10";
+		where src=INET6_ATON('{$l}') order by upd desc limit 10";
   $res = $db->query($sql);
 
   while ($e = $res->fetch_row()) {
@@ -304,13 +283,8 @@ function thirtyStats($l) {
     $da = "upd >= date_sub(now(),interval 30 day)";
   }
 
-	$sql = "select d, sum(u), sum(c) from (
-				select date(upd) as d, count(distinct INET_NTOA(src)) as u, count(*) as c from {$log_table}
-					where ${da} and src != 0 and acc != 9 group by d desc
-				union
-				select date(upd) as d, count(distinct INET6_NTOA(src6)) as u, count(*) as c from {$log_table}
-					where ${da} and src6 is not null and acc != 9 group by d desc
-			) t group by d order by d desc";
+	$sql = "select date(upd) as d, count(distinct INET6_NTOA(src)) as u, count(*) as c from {$log_table}
+					where ${da} and acc != 9 group by d order by d desc";
 	$res = $db->query($sql);
 	while ($e = $res->fetch_row()) {
     $d[] = $e[0];
@@ -343,15 +317,8 @@ function twentyfourStats($l) {
   global $db, $log_table;
 
   $dq = ($l) ? "date(upd) = '{$l}'" : "upd >= date_sub(now(),interval 23 hour)";
-  $sql = "select ip, cnt, u from (
-				select INET_NTOA(src) as ip, count(*) as cnt, max(upd) as u from {$log_table} 
-				where {$dq} and src != 0 and acc != 9
-				group by ip
-				union
-				select INET6_NTOA(src6) as ip, count(*) as cnt, max(upd) as u from {$log_table} 
-				where {$dq} and src6 is not null and acc != 9
-				group by ip
-			) t order by u desc";
+  $sql = "select INET6_NTOA(src) as ip, count(*) as cnt, max(upd) as u from {$log_table} 
+				where {$dq} and acc != 9 group by ip order by u desc";
   $res = $db->query($sql);
   $n = $res->num_rows;
   if (!$n) {
