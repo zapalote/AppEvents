@@ -132,13 +132,59 @@ footer {
 .robot {
 	color: grey;
 }
+
+.opts {
+	position: absolute;
+	top: 4rem;
+	right: 1rem;
+	font-size: 1.7rem;
+	background-color: #868686;
+	color: white;
+	width: 3rem;
+	height: 3rem;
+	border-radius: 50%;
+}
+.hamburger {
+	position: relative;
+	top: 21%;
+	left:23%;
+}
+.action-menu {
+	visibility: hidden;
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	top: 1.5rem;
+	right: 0;
+	box-shadow:
+			0 6.7px 5.3px rgba(0, 0, 0, 0.028),
+			0 22.3px 17.9px rgba(0, 0, 0, 0.042),
+			0 100px 80px rgba(0, 0, 0, 0.07);
+	z-index: 1;
+	border-radius: 0.5rem;
+	padding: 0;
+	margin: 0;
+	width: 150px;
+}
+.action-menu li {
+	list-style: none;
+	font-size: 1.1rem;
+	color: white;
+	background-color: #868686;
+	display: inline;
+	text-align: center;
+	padding: 0.6rem;
+	border-bottom: 1px solid white;
+}
+.visible {
+	visibility: visible;
+}
+.invisible {
+	visibility: hidden;
+}
+
 @media (max-width: 480px) {
 	/* mobile */
 	.container { width: 100%; margin: auto; font-size: 0.9em; max-width: 480px;}
 	.popup { width:80%; right: 10%; }
-	.btns {
-		display: flex;
-		flex-wrap: wrap;
-		margin: 10px 0;
-	}
 }

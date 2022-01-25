@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { LoadingIndicator, StatsTable } from '.';
+import { LoadingIndicator, StatsTable, Nav } from '.';
 import { getApi } from '../utils';
 import { useNavigate } from 'react-router-dom';
 
@@ -59,9 +59,7 @@ const TopicsStats = () => {
         {table && (
           <>
             <h3>Top topics last 30 days {table.length < 300? '' : '(top 300)'}
-              <div className="btns">
-                <div onClick={handleDone} className="button" >Done</div>
-              </div>
+              <Nav active='topics' />
             </h3>
             <StatsTable headings={['Topic', 'Hits']} data={table} />
           </>

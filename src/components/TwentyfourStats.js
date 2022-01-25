@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { LoadingIndicator, SimpleChart, StatsTable, IPpopUp } from '.';
+import { LoadingIndicator, SimpleChart, StatsTable, IPpopUp, Nav } from '.';
 import { getApi, anonIP } from '../utils';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -77,10 +77,6 @@ const TwentyfourStats = () => {
     setShowPopup(false);
   }
 
-  const handleRefresh = () => {
-    navigate('/');
-  }
-
   const ListResults = () => {
     const { chartCfg, chart, labels, tooltips } = initChart(results.chart, results.last);
 
@@ -100,13 +96,7 @@ const TwentyfourStats = () => {
         </div>
 
         <h3>Sessions — {date}
-          <div className="btns">
-            <div onClick={() => navigate('/30')} className="button" >30 days</div>
-            <div onClick={() => navigate('/m')} className="button" >monthly</div>
-            <div onClick={() => navigate('/ref')} className="button" >referrals</div>
-            <div onClick={() => navigate('/s')} className="button" >topics</div>
-            <div onClick={handleRefresh} className="button" >{params.date ? 'done' : 'refresh'}</div>
-          </div>
+          <Nav active='24 hrs' />
         </h3>
 
         <StatsTable headings={['Session', 'Hits', 'Last']} data={table} rowsep={rowsep}

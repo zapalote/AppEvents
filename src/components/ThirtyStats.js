@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { LoadingIndicator, SimpleChart, StatsTable } from '.';
+import { LoadingIndicator, SimpleChart, StatsTable, Nav } from '.';
 import { getApi } from '../utils';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -95,12 +95,7 @@ const ThirtyStats = () => {
         </div>
 
         <h3>Sessions — {period}
-          <div className="btns">
-            <div onClick={() => navigate('/m')} className="button" >monthly</div>
-            <div onClick={() => navigate('/ref')} className="button" >referrals</div>
-            <div onClick={() => navigate('/s')} className="button" >topics</div>
-            <div onClick={handleDone} className="button" >Done</div>
-          </div>
+          <Nav active='30 days' />
         </h3>
 
         <StatsTable headings={['Date', 'Sessions', 'Hits']} data={table} drill={drill} />

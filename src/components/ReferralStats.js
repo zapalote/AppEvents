@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { LoadingIndicator, StatsTable } from '.';
+import { LoadingIndicator, StatsTable, Nav } from '.';
 import { getApi } from '../utils';
 import { useNavigate } from 'react-router-dom';
 
@@ -63,9 +63,7 @@ const ReferralStats = () => {
         { table && (
           <>
             <h3>Referrals {results.last}
-              <div className="btns">
-                <div onClick={handleDone} className="button" >Done</div>
-              </div>
+              <Nav active='referrals' />
             </h3>
             <StatsTable headings={['Referral', 'Landing', 'Time']} data={table} />
           </>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { LoadingIndicator, SimpleChart, StatsTable } from '.';
+import { LoadingIndicator, SimpleChart, StatsTable, Nav } from '.';
 import { getApi } from '../utils';
 import { useNavigate } from 'react-router-dom';
 
@@ -90,9 +90,7 @@ const MonthlyStats = () => {
         </div>
 
         <h3>Forecast {month}: {results.forecast} events
-          <div className="btns">
-            <div onClick={handleDone} className="button" >Done</div>
-          </div>
+          <Nav active="monthly" />
         </h3>
 
         <StatsTable headings={['Month', 'Sessions', 'Hits']} data={table} drill={drill} />

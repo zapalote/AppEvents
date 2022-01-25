@@ -7,6 +7,7 @@ import LoadingIndicator from './LoadingIndicator';
 import StatsTable from './StatsTable';
 import IPpopUp from './IPpopUp';
 import SimpleChart from './SimpleChart';
+import Nav from './Nav';
 
 export {
   TwentyfourStats,
@@ -17,5 +18,6 @@ export {
   StatsTable,
   SimpleChart,
   IPpopUp,
+  Nav,
   LoadingIndicator
 };
