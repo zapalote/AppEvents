@@ -5,7 +5,7 @@ import ReferralStats from './ReferralStats';
 import TopicsStats from './TopicsStats';
 import LoadingIndicator from './LoadingIndicator';
 import StatsTable from './StatsTable';
-import IPpopUp from './IPpopUp';
+import { IPpopUp } from './IPpopUp';
 import SimpleChart from './SimpleChart';
 import Nav from './Nav';
 

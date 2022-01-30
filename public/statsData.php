@@ -278,8 +278,12 @@ function thirtyStats($l) {
     $month = substr($l, -2);
     $year = substr($l, 0, 4);
     $da = "month(upd) = '{$month}' and year(upd) = '{$year}'";
+    $da = "upd like '{$year}-{$month}%'";
   } else {
     // last 30 days
+    $t = explode(' ', date("YYYY MM", strtotime('-30 days')));
+    $year = $t[0];
+    $month = $t[1];
     $da = "upd >= date_sub(now(),interval 30 day)";
   }
 
@@ -293,10 +297,19 @@ function thirtyStats($l) {
 		$chart[$e[0]] = $e[1];
 	}
 
-	for($i = 30; $i >= 0 ; $i--){
-		$dd =  date("D j-M", strtotime('-'. $i .' days'));
-	  $days[$dd] = 0;
-	}
+  $n = ($l)? cal_days_in_month(CAL_GREGORIAN, $month, $year) : 30; 
+  if($l) {
+    for ($i = 1; $i <= $n; $i++) {
+      $dd =  date("D j-M", strtotime("${year}-${month}-${i}"));
+      $days[$dd] = 0;
+    }
+  } else {
+    for ($i = $n; $i >= 0; $i--) {
+      $dd =  date("D j-M", strtotime("-${i} days"));
+      $days[$dd] = 0;
+    }
+  }
+
 	foreach ($chart as $k => $v) {
 		$dd = date("D j-M", strtotime($k));
 		$days[$dd] = $chart[$k];

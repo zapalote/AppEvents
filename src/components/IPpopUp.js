@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 
-const IPpopUp = (props) => {
+const IPEvents = (props) => {
   const { data } = props;
   const [show, setShow] = useState(false);
 
@@ -9,7 +9,7 @@ const IPpopUp = (props) => {
     props.onClose && props.onClose();
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setShow(props.show);
   }, [props.show]);
 
@@ -31,4 +31,4 @@ const IPpopUp = (props) => {
   );
 };
 
-export default IPpopUp;
+export const IPpopUp = React.memo(IPEvents);
