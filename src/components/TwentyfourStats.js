@@ -86,7 +86,7 @@ const TwentyfourStats = () => {
     results.ips?.forEach((ip, idx) => {
       table.push([anonIP(ip), results.hits[idx], results.times[idx].substr(11)]);
       popupLinks.push(ip);
-      rowsep.push([results.rowsep[idx]]);
+      rowsep.push(results.rowsep[idx]);
     });
 
     return (
@@ -96,7 +96,7 @@ const TwentyfourStats = () => {
         </div>
 
         <h3>Sessions — {date}
-          <Nav active='24 hrs' />
+          <Nav active={params.date ?? '24 hrs'} />
         </h3>
 
         <StatsTable headings={['Session', 'Hits', 'Last']} data={table} rowsep={rowsep}

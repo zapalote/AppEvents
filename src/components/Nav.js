@@ -45,8 +45,11 @@ const Nav = (props) => {
     }, []);
 
     return (
-      <div ref={ref} className="opts" onClick={() => setOpen(!open)}><GiHamburgerMenu className='hamburger' />
-        <ul className={`action-menu ${open ? 'visible' : 'invisible'}`}>
+      <div className="dropdown hamburger">
+        <div ref={ref} className="dropbtn" onClick={() => setOpen(!open)}>
+          <GiHamburgerMenu />
+        </div>
+        <ul className={`dropdown-content ${open ? 'shown' : 'hidden'}`}>
           {
             actions.map((opt, idx) => {
                 return (
