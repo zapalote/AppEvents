@@ -344,16 +344,10 @@ function twentyfourStats($l) {
     $chart['h'.$hh] = 0;
   }
 
-  $past_midnight = True;
-  $midnight = date("Y-m-d", strtotime('midnight'));
   while ($e = $res->fetch_row()) {
     $ips[] = $e[0];
     $c[] = $e[1];
     $upd[] = $e[2];
-    if($past_midnight && substr($e[2], 0, 10) != $midnight){
-      $rowsep[] = 1;
-      $past_midnight = false;
-    } else { $rowsep [] = 0; }
     $ddd = substr($e[2], 11, 2);
     $chart['h'.$ddd] += $e[1];
   }
@@ -364,7 +358,6 @@ function twentyfourStats($l) {
       "ips" => $ips,
       "hits"=> $c,
       "times" => $upd,
-      "rowsep" => $rowsep,
       "chart" => $chart
   );
   echo json_encode($results);

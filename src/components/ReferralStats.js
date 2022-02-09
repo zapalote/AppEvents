@@ -65,7 +65,7 @@ const ReferralStats = () => {
             <h3>Referrals {results.last}
               <Nav active='referrals' />
             </h3>
-            <StatsTable headings={['Referral', 'Landing', 'Time']} data={table} />
+            <StatsTable headings={['Referral', 'Landing', 'Time']} sortable={[1, 1, 0]} data={table} />
           </>
         )}
         {bots && (
@@ -75,7 +75,7 @@ const ReferralStats = () => {
                 <div onClick={handleDone} className="button" >Done</div>
               </div>
             </h3>
-            <StatsTable headings={['Robots', 'Landing', 'Time']} data={bots} />
+            <StatsTable headings={['Robots', 'Landing', 'Time']} sortable={[1, 1, 0]} data={bots} />
           </>
         )}
         <h3>All referrals 
@@ -83,7 +83,7 @@ const ReferralStats = () => {
             <div onClick={handleDone} className="button" >Done</div>
           </div>
         </h3>
-        <StatsTable headings={['Referral', 'Events']} data={all} />
+        <StatsTable headings={['Referral', 'Events']} sortable={[1, 1]} data={all} />
       </>
     );
   }

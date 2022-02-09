@@ -93,7 +93,7 @@ const MonthlyStats = () => {
           <Nav active="monthly" />
         </h3>
 
-        <StatsTable headings={['Month', 'Sessions', 'Hits']} data={table} drill={drill} />
+        <StatsTable headings={['Month', 'Sessions', 'Hits']} sortable={[1, 1, 1]} data={table} drill={drill} />
       </>
     );
   }

@@ -80,15 +80,22 @@ const TwentyfourStats = () => {
   const ListResults = () => {
     const { chartCfg, chart, labels, tooltips } = initChart(results.chart, results.last);
 
+    const day = new Date().getDate();
+    let past_midnight = false;
     let popupLinks = [];
     let table = [];
     let rowsep = [];
     results.ips?.forEach((ip, idx) => {
       table.push([anonIP(ip), results.hits[idx], results.times[idx].substr(11)]);
       popupLinks.push(ip);
-      rowsep.push(results.rowsep[idx]);
+      const meridian = parseInt(results.times[idx].substr(8,2)) < day;
+      if(!past_midnight && meridian){
+        past_midnight = true;
+        rowsep.push(1);
+      } else {
+        rowsep.push(0);
+      }
     });
-
     return (
       <>
         <div className='chart-container'>
@@ -99,13 +106,14 @@ const TwentyfourStats = () => {
           <Nav active={params.date ?? '24 hrs'} />
         </h3>
 
-        <StatsTable headings={['Session', 'Hits', 'Last']} data={table} rowsep={rowsep}
+        <StatsTable headings={['Session', 'Hits', 'Last']} sortable={[1, 1, 0]} data={table} rowsep={rowsep}
           popupLinks={popupLinks} onPopUp={onPopUP} />
         {showPopup && <IPpopUp onClosePopup={onClosePopup} data={ipEvents} show={showPopup} />}
       </>
     );
   }
 
+  console.log('render 24');
   return (
     <div>
       { loading?

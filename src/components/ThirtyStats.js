@@ -98,7 +98,7 @@ const ThirtyStats = () => {
           <Nav active={params.month ?? '30 days'} />
         </h3>
 
-        <StatsTable headings={['Date', 'Sessions', 'Hits']} data={table} drill={drill} />
+        <StatsTable headings={['Date', 'Sessions', 'Hits']} sortable={[0, 1, 1]} data={table} drill={drill} />
       </>
     );
   }

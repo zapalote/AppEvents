@@ -12,10 +12,12 @@ const useSortableData = (items, config = null) => {
     let sortableItems = [...items];
     if (sortConfig !== null) {
       sortableItems.sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) {
+        const n = a[sortConfig.key];
+        const m = b[sortConfig.key];
+        if (n < m) {
           return sortConfig.direction === 'asc' ? -1 : 1;
         }
-        if (a[sortConfig.key] > b[sortConfig.key]) {
+        if (n > m) {
           return sortConfig.direction === 'asc' ? 1 : -1;
         }
         return 0;
@@ -40,7 +42,7 @@ const useSortableData = (items, config = null) => {
 };
 
 const StatsTable = (props) => {
-  const { headings, data, drill, popupLinks, rowsep } = props;
+  const { headings, sortable, data, drill, popupLinks, rowsep } = props;
   const { rows, requestSort, sortConfig } = useSortableData(data);
   const navigate = useNavigate();
 
@@ -88,17 +90,19 @@ const StatsTable = (props) => {
     setSortKeys(keys);
   }, [nCols]);
 
-  console.log(rowsep);
+  console.log('render table', sortable);
   return (
     <>
       <table id='stats' className='sttable'>
         <thead>
           <tr>
-            {headings.map((heading, idx) => (
-              <th key={"th" + idx} onClick={() => requestSort(sortKeys[idx])}
-                className={getClassNamesFor(sortKeys[idx])}><img className='sortableicon' src={Sortable} alt="sortable" />{heading}
-              </th>
-              )
+            {headings.map((heading, idx) => {
+              return sortable && sortable[idx] ? 
+                <th key={"th" + idx} onClick={() => requestSort(sortKeys[idx])}
+                  className={getClassNamesFor(sortKeys[idx])}><img className='sortableicon' src={Sortable} alt="sortable" />{heading}
+                </th> : 
+                <th key={"th" + idx}>{heading}</th>
+            }
             )}
           </tr>
         </thead>

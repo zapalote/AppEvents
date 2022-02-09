@@ -61,7 +61,7 @@ const TopicsStats = () => {
             <h3>Top topics last 30 days {table.length < 300? '' : '(top 300)'}
               <Nav active='topics' />
             </h3>
-            <StatsTable headings={['Topic', 'Hits']} data={table} />
+            <StatsTable headings={['Topic', 'Hits']} sortable={[1, 1]} data={table} />
           </>
         )}
         <h3>Topic ranking {table.length < 300 ? '' : '(top 300)'}
@@ -69,7 +69,7 @@ const TopicsStats = () => {
             <div onClick={handleDone} className="button" >Done</div>
           </div>
         </h3>
-        <StatsTable headings={['Topic', 'Hits']} data={all} />
+        <StatsTable headings={['Topic', 'Hits']} sortable={[1, 1]} data={all} />
       </>
     );
   }
