@@ -113,7 +113,6 @@ const TwentyfourStats = () => {
     );
   }
 
-  console.log('render 24');
   return (
     <div>
       { loading?

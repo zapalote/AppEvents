@@ -11,18 +11,19 @@ if(isset($_REQUEST['log'])){
 	$q = trim(preg_replace('/\s+/', ' ', $q));
 	// referrer
 	$ref = '';
-	if(isset($_REQUEST['r'])) {
-		$site_regex = "/^" . STATS_SITE . "\//";
+	$site_regex = "/^(http|https)\:\/\/(www\.)*" . STATS_SITE . "\//i";
+	if(isset($_REQUEST['r']) && !preg_match($site_regex, $_REQUEST['r'])) {
 		$ref = mb_strtolower(preg_replace('/^(http|https)\:\/\//', '', $_REQUEST['r']), 'UTF-8');
-		$ref = preg_replace($site_regex, '', $ref);
-		$ref = preg_replace('/\/.*$/', '', $ref);
-	}
-	// landing
-	$land = '';
-	if(isset($_REQUEST['l'])) {
-		$land = preg_replace('/^(http|https)\:\/\//', '', $_REQUEST['l']);
-		$land = preg_replace($site_regex, '', $land);
-		$land = preg_replace('/\/$/', '', $land);
+		// remove predicates e.g. ?fbclid=...
+		$ref = preg_replace('/[\/\?].*$/', '', $ref);
+
+		// landing
+		$land = '';
+		if(isset($_REQUEST['l'])) {
+			$land = preg_replace($site_regex, '', $land);
+			// remove predicates e.g. ?fbclid=...
+			$land = preg_replace('/[\/\?].*$/', '', $land);
+		}
 	}
 
 	// acc: desktop == 0; mobile == 1; robot == 9
